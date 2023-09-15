@@ -3,13 +3,15 @@
 
 Follow this steps for installing the project
 
+Clone this project.
 ```bash
   git clone https://github.com/DevelopFer/fo-itj-exercise.git
 ```
+Access the main folder.
 ```bash
   cd fo-itj-exercise
 ```
-Install all required dependencies & Compile files using typescript
+Install all required dependencies & Compile files using typescript.
 ```bash
   npm install && npm run build
 ```
