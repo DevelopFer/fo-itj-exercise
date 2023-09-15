@@ -1,0 +1,17 @@
+{
+  "name": "test-fernando-ordonez",
+  "version": "1.0.0",
+  "description": "This is a test applying for a Full Stack developer position",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest --run --reporter verbose",
+    "assignment": "node ./dist/index.js"
+  },
+  "author": "Fernando Ordoñez",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.29.3"
+  }
+}
