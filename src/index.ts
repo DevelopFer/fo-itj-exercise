@@ -78,7 +78,7 @@ const main = async () => {
     const response = await matchShipments( shipments, shipmentManager, (shipmentManager.permutations.length - 1) );
 
     console.log(`Max SS: ${response.maxSs}`);
-    console.log(response.table);
+    console.table(response.table);
 }
 
 main();
