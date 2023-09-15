@@ -1,6 +1,4 @@
 const fs = require('fs');
-const readline = require('readline');
-
 
 import { ShipmentManager } from "./shipmentmanager";
 
