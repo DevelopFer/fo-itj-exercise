@@ -17,7 +17,7 @@ Install all required dependencies & Compile files using typescript.
 ```
 Run!
 ```bash
-  npm run assignment --addressFilePath=./addresses.txt --driversFilePath=./drivers.txt
+  npm run routing --addressFilePath=./addresses.txt --driversFilePath=./drivers.txt
 ```
 
 Output Example

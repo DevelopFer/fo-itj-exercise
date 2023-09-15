@@ -20,9 +20,21 @@ const validateParameters = () => {
 }
 
 
+const validateLength = (addresses:[],drivers:[]) => {
+    if( addresses.length !== drivers.length ){
+        console.error("Files have different extensions");
+        process.exit(1);
+    }
+    if( ! addresses.length || ! drivers.length ){
+        console.error("Files must contain data");
+        process.exit(1);
+    }
+}
+
+
 const matchShipments = async (addresses: string[], manager: any, index:number) => {
 
-    if( index === 0 ) return { table:manager.table,maxSs:manager.maxSs };
+    
     
     let   totalSs         = 0;
     const drivers         = manager.permutations.pop();
@@ -33,14 +45,18 @@ const matchShipments = async (addresses: string[], manager: any, index:number) =
         totalSs += ss;
         asignationTable.push([addresses[i],drivers[i]]);
     }
-    // console.log(totalSs, manager.maxSs);
-    // console.table(asignationTable);    
+    
+    console.log(totalSs, manager.maxSs);
+    console.table(asignationTable);    
+    
     if( totalSs > manager.maxSs ){
         manager.maxSs = totalSs;
         manager.table = asignationTable;
     }
-
-    return matchShipments( addresses, manager, manager.permutations.length );
+    
+    if( index === 0 ) return { table:manager.table,maxSs:manager.maxSs };
+    
+    return matchShipments( addresses, manager, manager.permutations.length - 1);
     
 };
 
@@ -53,6 +69,8 @@ const main = async () => {
     
     const shipments     = fs.readFileSync(addressesPath, 'utf-8').split('\n').filter(Boolean);
     const drivers       = fs.readFileSync(driversPath, 'utf-8').split('\n').filter(Boolean);
+
+    validateLength(shipments, drivers);
     
     const shipmentManager = new ShipmentManager();
     await shipmentManager.generatePermutations(drivers);

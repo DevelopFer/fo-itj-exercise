@@ -22,8 +22,7 @@ export class ShipmentManager {
 
     getStreetName = ( fullAddress:string ): string => {
         
-        const aux = fullAddress.split(",");
-        return aux[0];
+        return fullAddress.split(",")[0];
 
     }
 
@@ -69,9 +68,7 @@ export class ShipmentManager {
      */
     calculateEvenSs = ( driverName: string ): number => {
         
-        const totalVowels = this.countVowels(driverName);
-
-        return totalVowels * EVEN_MULTIPLIER;
+        return this.countVowels(driverName) * EVEN_MULTIPLIER; 
     }
 
     /**
@@ -80,9 +77,7 @@ export class ShipmentManager {
      */
     calculateOddSs = (driverName: string ): number => {
 
-        const totalConsonants = this.countConsonants(driverName);
-
-        return totalConsonants * ODD_MULTIPLIER;
+        return this.countConsonants(driverName) * ODD_MULTIPLIER;
 
     }
 
@@ -91,21 +86,20 @@ export class ShipmentManager {
      * length of the driver’s name, the SS is increased by 50% above the base SS.
      */
     increasePercentageIfRequired = (streetName: string, driverName: string, ss: number ): number => {
-        const streetFactors = this.countFactors(streetName);
-        const driverFactors = this.countFactors(driverName);
-        
-        return Object.keys(streetFactors).some( factor => (factor in driverFactors) ) ? ( ss += ss * INCREASE_PERCENTAGE ) : ss;
+        let factors = this.countFactors(streetName);
+        let index = 0;
+        while( index < driverName.length ){
+            if( (driverName.length % index) === 0 && ( index in factors ) ) return ss += ss * INCREASE_PERCENTAGE;
+            index++;
+        }
+        return ss;
         
     }   
 
     evaluatePair = async (streetAddress: string, driverName: string ) => {
         const streetName: string = this.getStreetName(streetAddress);
         let ss = -Infinity;
-        if( this.lengthIsEven(streetName) ){
-            ss = this.calculateEvenSs(driverName);
-        }else{
-            ss = this.calculateOddSs(driverName);
-        }
+        ss = this.lengthIsEven(streetName) ? this.calculateEvenSs(driverName) : this.calculateOddSs(driverName);
         ss = this.increasePercentageIfRequired(streetName, driverName, ss);
         return ss;
     };
