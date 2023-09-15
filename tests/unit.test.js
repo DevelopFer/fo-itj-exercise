@@ -1,7 +1,7 @@
 import {it, expect, describe, beforeEach, expectTypeOf, beforeAll} from 'vitest';
 import { faker } from '@faker-js/faker';
 import { ShipmentManager } from '../dist/shipmentmanager';
-import { List } from "../dist/list";
+
 
 let shipmentManager;
 
@@ -132,24 +132,6 @@ describe("Unit Tests", () => {
         expect(Object.keys(totalFactors).length).toBe(5);
 
     });
-
-    it("should build a new list", () => {
-
-        const demoString = "12345678";
-        const mylist = new List();
-        mylist.add(1);
-        mylist.add(2);
-        mylist.add(3);
-        mylist.add(4);
-        mylist.add(5);
-        mylist.add(6);
-        mylist.add(7);
-        mylist.add(8);
-        
-        expect(mylist.print()).toEqual(demoString);
-
-    });
-
 
     it("should generate permutations", async () => {
         

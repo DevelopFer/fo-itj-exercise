@@ -1,5 +1,3 @@
-import { List } from "./list";
-
 
 const EVEN_MULTIPLIER = 1.5;
 const ODD_MULTIPLIER  = 1;
@@ -10,7 +8,7 @@ export class ShipmentManager {
     vowels      : {[key:string]:number};
     table       : Array<[]>;
     maxSs       : number;
-    driversList : List;
+    
     permutations: Array<[]>;
     
     constructor(){
@@ -112,9 +110,7 @@ export class ShipmentManager {
         return ss;
     };
     
-    setDriversList = (driversList:List): void => {
-        this.driversList = driversList;
-    };
+    
 
     /** Heaps Algorithm */
     generatePermutations = async (elements: []): Promise<void> => {

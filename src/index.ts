@@ -1,7 +1,7 @@
 const fs = require('fs');
 const readline = require('readline');
 
-import { List } from "./list";
+
 import { ShipmentManager } from "./shipmentmanager";
 
 
@@ -24,22 +24,14 @@ const matchShipments = async (addresses: string[], manager: any, index:number) =
 
     if( index === 0 ) return { table:manager.table,maxSs:manager.maxSs };
     
-    const list = new List();
-    for(let driver of manager.permutations.pop() ){
-        list.add(driver);
-    }
-
-    manager.setDriversList(list);
-    
-    let totalSs         = 0;
-    let scout           = manager.driversList.head;
-    let asignationTable = [];
+    let   totalSs         = 0;
+    const drivers         = manager.permutations.pop();
+    let   asignationTable = [];
     
     for(let i = 0; i < addresses.length; i++){
-        const ss = await manager.evaluatePair(addresses[i], scout.value);
+        const ss = await manager.evaluatePair(addresses[i], drivers[i]);
         totalSs += ss;
-        asignationTable.push([addresses[i],scout.value]);
-        scout = scout.next;
+        asignationTable.push([addresses[i],drivers[i]]);
     }
     // console.log(totalSs, manager.maxSs);
     // console.table(asignationTable);    
