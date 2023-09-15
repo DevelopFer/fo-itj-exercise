@@ -1,7 +1,7 @@
 
 ## Installation
 
-Follow this steps for installing the project
+Follow these steps for installing the project
 
 Clone this project.
 ```bash
