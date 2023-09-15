@@ -9,13 +9,9 @@ Follow this steps for installing the project
 ```bash
   cd fo-itj-exercise
 ```
-Install all required dependencies
+Install all required dependencies & Compile files using typescript
 ```bash
-  npm install
-```
-Compile files using typescript
-```bash
-  npx tsc
+  npm install && npm run build
 ```
 Run!
 ```bash
