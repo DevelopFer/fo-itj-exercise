@@ -46,8 +46,8 @@ const matchShipments = async (addresses: string[], manager: any, index:number) =
         asignationTable.push([addresses[i],drivers[i]]);
     }
     
-    console.log(totalSs, manager.maxSs);
-    console.table(asignationTable);    
+    // console.log(totalSs, manager.maxSs);
+    // console.log(asignationTable);    
     
     if( totalSs > manager.maxSs ){
         manager.maxSs = totalSs;
@@ -78,7 +78,7 @@ const main = async () => {
     const response = await matchShipments( shipments, shipmentManager, (shipmentManager.permutations.length - 1) );
 
     console.log(`Max SS: ${response.maxSs}`);
-    console.table(response.table);
+    console.log(response.table);
 }
 
 main();
