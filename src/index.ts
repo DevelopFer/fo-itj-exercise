@@ -60,23 +60,33 @@ const matchShipments = async (addresses: string[], manager: any, index:number) =
 
 const main = async () => {
     
-    validateParameters();
+    try {
+        
+        validateParameters();
+        
+        const addressesPath = process.env.npm_config_addressfilepath;
+        const driversPath   = process.env.npm_config_driversfilepath;
+        
+        const shipments     = fs.readFileSync(addressesPath, 'utf-8').split('\n').filter(Boolean);
+        const drivers       = fs.readFileSync(driversPath, 'utf-8').split('\n').filter(Boolean);
     
-    const addressesPath = process.env.npm_config_addressfilepath;
-    const driversPath   = process.env.npm_config_driversfilepath;
+        validateLength(shipments, drivers);
+        
+        const shipmentManager = new ShipmentManager();
+        await shipmentManager.generatePermutations(drivers);
+        
+        const response = await matchShipments( shipments, shipmentManager, (shipmentManager.permutations.length - 1) );
     
-    const shipments     = fs.readFileSync(addressesPath, 'utf-8').split('\n').filter(Boolean);
-    const drivers       = fs.readFileSync(driversPath, 'utf-8').split('\n').filter(Boolean);
+        console.log(`Max SS: ${response.maxSs}`);
+        console.table(response.table);
+        process.exit(0);
 
-    validateLength(shipments, drivers);
-    
-    const shipmentManager = new ShipmentManager();
-    await shipmentManager.generatePermutations(drivers);
-    
-    const response = await matchShipments( shipments, shipmentManager, (shipmentManager.permutations.length - 1) );
-
-    console.log(`Max SS: ${response.maxSs}`);
-    console.table(response.table);
+    } catch (error) {
+        
+        console.error(error.message);
+        process.exit(1);
+        
+    }
 }
 
 main();
