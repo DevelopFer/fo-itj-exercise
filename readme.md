@@ -4,11 +4,14 @@
 Follow this steps for installing the project
 
 ```bash
-  cd my-project
+  git clone https://github.com/DevelopFer/fo-itj-exercise.git
+```
+```bash
+  cd fo-itj-exercise
 ```
 Install all required dependencies
 ```bash
-  npm install my-project
+  npm install
 ```
 Compile files using typescript
 ```bash
