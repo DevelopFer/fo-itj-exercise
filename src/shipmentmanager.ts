@@ -8,7 +8,7 @@ export class ShipmentManager {
     vowels      : {[key:string]:number};
     table       : Array<[]>;
     maxSs       : number;
-    
+    evaluatedPairs : Map<string, number>;
     permutations: Array<[]>;
     
     constructor(){
@@ -17,6 +17,7 @@ export class ShipmentManager {
         this.maxSs = -Infinity;
         this.table = [];
         this.permutations = [];
+        this.evaluatedPairs = new Map();
 
     }
 
@@ -97,10 +98,13 @@ export class ShipmentManager {
     }   
 
     evaluatePair = async (streetAddress: string, driverName: string ) => {
+        const key = `${streetAddress}:${driverName}`;
+        if( this.evaluatedPairs.has(key) ) return this.evaluatedPairs.get(key);
         const streetName: string = this.getStreetName(streetAddress);
         let ss = -Infinity;
         ss = this.lengthIsEven(streetName) ? this.calculateEvenSs(driverName) : this.calculateOddSs(driverName);
         ss = this.increasePercentageIfRequired(streetName, driverName, ss);
+        this.evaluatedPairs.set(key,ss);
         return ss;
     };
     

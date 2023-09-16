@@ -52,7 +52,7 @@ const matchShipments = async (addresses: string[], manager: any, index:number) =
         manager.table = asignationTable;
     }
     
-    if( index === 0 ) return { table:manager.table,maxSs:manager.maxSs };
+    if( index === 0 ) return { table:manager.table,maxSs:manager.maxSs};
     
     return matchShipments( addresses, manager, manager.permutations.length - 1);
     
